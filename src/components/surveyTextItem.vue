@@ -4,7 +4,7 @@
     <p>Q</p>
     <label> {{ question }}</label>
   </div>
-  <div class="answer" >
+  <div class="answer">
     <input type="text" v-model="itme.etc" >
   </div>
 </template>

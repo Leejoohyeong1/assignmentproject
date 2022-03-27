@@ -1,8 +1,8 @@
 <template>
   <div class="scrollframe">
     <div class="scroll">
-      <div v-for="(item) in propsSurveyList" class="cardView"  v-bind:key="item">
-        <survey-text-item v-bind:props-survey-item="item"></survey-text-item>
+      <div v-for="(item) in propsSurveyList" class="cardView" v-bind:key="item">
+        <survey-text-item ref="surveyItem" v-bind:props-survey-item="item"></survey-text-item>
       </div>
     </div>
   </div>
@@ -17,18 +17,23 @@ import SurveyTextItem from "@/components/surveyTextItem";
 export default {
   name: "AppSurveyList",
   components: {SurveyTextItem},
-  props:['propsSurveyList'],
+  props: ['propsSurveyList'],
   data() {
     return {
-      surveyList : this.propsSurveyList,
+      surveyList: this.propsSurveyList,
+      requestData:[],
     }
   },
-
+  emits: ['getItem'],
   methods: {
 
-    getData:function (){
-      console.log('AppSurveyList getData call');
-      console.log(this);
+    getData: function () {
+
+      //console.log(this.$refs.surveyItem.getItem());
+      this.$refs.surveyItem.map((e)=>{
+        this.$data.requestData.push(e.getItem());
+      });
+      return this.$data.requestData;
     }
   }
 }

@@ -44,8 +44,8 @@ export default {
   methods : {
     surveySend: function (){
       console.log("surveySend");
-      this.$refs.SurveyList.getData();
-
+      const a = this.$refs.SurveyList.getData()
+      console.log(a);
     }
   }
 }
