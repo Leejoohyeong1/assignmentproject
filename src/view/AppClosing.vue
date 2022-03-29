@@ -23,22 +23,6 @@ export default {
   beforeMount() {
     setTimeout(()=>router.push("./"),3000);
     this.$data.mainTitle = "참여해주셔서 감사합니다"
-    //통신부분
-    /*
-    axios.('/test?name=veneas')
-        .then(function (response) {
-          // 성공한 경우 실행
-          console.log(response);
-        })
-        .catch(function (error) {
-          // 에러인 경우 실행
-          console.log(error);
-        })
-        .then(function () {
-          // 항상 실행
-        });
-
-    */
   },
 }
 </script>

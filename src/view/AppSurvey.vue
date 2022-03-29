@@ -56,6 +56,7 @@ export default {
     surveySend: function (){
       const request = this.$refs.SurveyList.getData();
       console.log(request);
+      //통신 후 정상 응답이 온다면 페이지 이동합니다.
       router.push("./close");
     }
   }
