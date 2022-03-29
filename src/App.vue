@@ -1,5 +1,5 @@
 <template>
-  <app-header></app-header>
+  <AppHeader v-bind:props-main-title="mainTitle"/>
   <div class="content">
     <router-view>
 
@@ -9,13 +9,27 @@
 </template>
 
 <script>
-import AppHeader from "./components/AppHeader.vue";
+//import AppHeader from "./components/AppHeader.vue";
 
 
+import AppHeader from "@/components/AppHeader";
 export default {
-  components: {
-    'app-header': AppHeader,
-  }
+  data:function (){
+    return {
+      mainTitle:"설문",
+      surveyCode:"1"
+    }
+  },
+  methods:{
+    mainTitleChange: function (title) {
+      this.$data.mainTitle = title;
+    },
+    setSurveyCode: function (code){
+      this.$data.surveyCode = code
+    }
+
+  },
+  components: {AppHeader},
 }
 </script>
 
@@ -31,7 +45,7 @@ export default {
     overflow: hidden;
     height: calc(100vh - 4.5rem);
     width: 100%;
-    background: violet;
+
   }
 
 </style>

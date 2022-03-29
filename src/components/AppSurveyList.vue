@@ -1,46 +1,72 @@
 <template>
   <div class="scrollframe">
     <div class="scroll">
-      <div v-for="(item) in propsSurveyList" class="cardView" v-bind:key="item">
-        <survey-text-item ref="surveyItem" v-bind:props-survey-item="item"></survey-text-item>
+      <div v-for="(item,index) in surveyList" class="cardView" v-bind:key="item">
+        <survey-text-item
+            v-if="item.questionType == 'text'"
+            v-bind:props-index="index"
+            v-bind:props-survey-item="item"
+            @handleInput="inputHandler"
+        />
+
+        <survey-ox-item
+            v-if="item.questionType == 'radio'"
+            v-bind:props-index="index"
+            v-bind:props-survey-item="item"
+            @handleInput="inputHandler"
+        />
+
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
-
-//import surveyOxItem from "@/components/surveyOxItem";
 import SurveyTextItem from "@/components/surveyTextItem";
+import SurveyOxItem from "@/components/surveyOxItem";
 
 export default {
   name: "AppSurveyList",
-  components: {SurveyTextItem},
-  props: ['propsSurveyList'],
+  components: {SurveyOxItem, SurveyTextItem },
+  props: ["propsSurveyList"],
   data() {
     return {
-      surveyList: this.propsSurveyList,
-      requestData:[],
-    }
+      surveyList: [],
+      requestData: [],
+    };
   },
-  emits: ['getItem'],
+  emits: ["getItem"],
+  beforeMount() {
+    this.surveyList = [...this.propsSurveyList].map((item) => {
+      return {
+        question: item.questionText,
+        questionType: item.questionType,
+        questionNo: item.no,
+        item: {
+          no: item.no,
+          etc: "",
+          awnser: (item.questionType == "text" ) ?  99:-1,
+        },
+      };
+    });
+  },
   methods: {
-
     getData: function () {
-
-      //console.log(this.$refs.surveyItem.getItem());
-      this.$refs.surveyItem.map((e)=>{
-        this.$data.requestData.push(e.getItem());
-      });
-      return this.$data.requestData;
-    }
-  }
-}
+      return this.surveyList.map(value => value.item);
+    },
+    inputHandler: function (value,index) {
+      const surveyItem = this.surveyList[index];
+      if (surveyItem.questionType === "text") {
+        surveyItem.item.etc = value;
+      }else if (surveyItem.questionType === "radio") {
+        surveyItem.item.awnser = value;
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 .scrollframe {
   flex: 1;
   display: block;
@@ -86,6 +112,4 @@ export default {
   border: 1px solid #ddd;
   transition: all, 2s;
 }
-
-
 </style>

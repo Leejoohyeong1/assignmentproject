@@ -6,8 +6,10 @@
 </template>
 
 <script>
-import router from "@/router";
+
 //import axios from "axios"
+import router from "@/router";
+
 export default {
   name: 'AppStarting',
 
@@ -17,10 +19,11 @@ export default {
       subTitle : ""
     }
   },
-  beforeMount() {
 
-    if(this.$route.query.code !== null){
-      //통신부분
+  beforeMount() {
+    setTimeout(()=>router.push("./"),3000);
+    this.$data.mainTitle = "참여해주셔서 감사합니다"
+    //통신부분
     /*
     axios.('/test?name=veneas')
         .then(function (response) {
@@ -36,34 +39,25 @@ export default {
         });
 
     */
-      this.$root.setSurveyCode(this.$route.query.code);
-      this.$root.mainTitleChange("식습관 설문");
-      this.$data.mainTitle = "식습관 설문";
-      this.$data.subTitle = "당신의 식습관은 어떻게 될까요";
-
-    }
   },
-  methods : {
-    goToSurveyPage: ()=>{router.push("./survey")}
-  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .launchDisplay{
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    text-align: center;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background: beige;
-  }
+.launchDisplay{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: beige;
+}
 </style>

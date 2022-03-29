@@ -2,7 +2,7 @@ import {createWebHistory,createRouter} from "vue-router";
 
 import AppStarting from "@/view/AppStarting";
 import AppSurvey from "./view/AppSurvey";
-
+import AppClosing from "@/view/AppClosing";
 
 const routes = [
     {
@@ -14,6 +14,11 @@ const routes = [
         path: '/survey',
         name: "AppSurvey",
         component: AppSurvey
+    },
+    {
+        path: '/close',
+        name: "AppClosing",
+        component: AppClosing
     }
 ]
 

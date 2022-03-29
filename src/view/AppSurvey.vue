@@ -1,27 +1,26 @@
 <template>
   <App-SurveyList ref="SurveyList"  v-bind:propsSurveyList="listData"></App-SurveyList>
-  <div class="btndiv" v-on:click="surveySend"></div>
+  <div class="btnDiv">
+    <button class="submitBtn" v-on:click="surveySend">
+      설문 완료
+    </button>
+
+  </div>
 </template>
 
 
 
 <script>
 import AppSurveyList from "../components/AppSurveyList"
-//import router from "@/router";
+import router from "@/router";
 
 export default {
   name: "AppSurvey",
   components : {
     'App-SurveyList' :AppSurveyList,
   },
-    data: function() {
-    return {
-      listData:[],
-    }
-  },
-
-  created() {
-    const a  = [
+    beforeMount() {
+    const responseData  = [
       {
         no:1,
         questionText : "질문11이당질문이당질문이당질문이당질문이당질문이당질문이당질문이당질문이당질",
@@ -36,16 +35,28 @@ export default {
         no:3,
         questionText : "질3문이당질문이당질문이당질문이당질문이당질문이당질문이당질",
         questionType : "text"
+      },
+      {
+        no:4,
+        questionText : "질4문이당질문이당질문이당질문이당질문이당질문이당질문이당질",
+        questionType : "radio"
       }
     ]
-    this.$data.listData = a;
+    this.$data.listData = responseData;
 
+  },
+
+
+  data: function() {
+    return {
+      listData:[],
+    }
   },
   methods : {
     surveySend: function (){
-      console.log("surveySend");
-      const a = this.$refs.SurveyList.getData()
-      console.log(a);
+      const request = this.$refs.SurveyList.getData();
+      console.log(request);
+      router.push("./close");
     }
   }
 }
@@ -53,11 +64,21 @@ export default {
 
 <style scoped>
 
-.btndiv{
-  height: 5rem;
+.btnDiv{
+  height: 4rem;
   width: 100%;
-  background: aqua;
   bottom: 0;
+}
+
+.submitBtn {
+  background: #ff4800;
+  color: white;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  border: none;
+  box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 </style>

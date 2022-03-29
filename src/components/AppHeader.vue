@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="wrap_header">
-      <h3>아하</h3>
+      <h3>{{ propsMainTitle }}</h3>
     </div>
   </header>
 </template>
@@ -9,11 +9,7 @@
 <script>
 export default {
   name: "AppHeader",
-  data: function(){
-    return {
-      str: 'AppHeader2'
-    }
-  }
+  props: ['propsMainTitle'],
 }
 </script>
 
